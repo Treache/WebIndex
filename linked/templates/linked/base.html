@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebIndex</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/linked/">Home</a></li>
+                <li><a href="/linked/new">Add link</a></li>
+                {% if auth %}
+                <li><a href="/linked/profile">Profile</a></li>
+                <li><a href="/linked/logout">Logout</a></li>
+                {% else %}
+                <li><a href="/linked/login">Login</a></li>
+                <li><a href="/linked/signup">Signup</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    {% if auth %}
+    <p>USER AUTHOIRIZED</p>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

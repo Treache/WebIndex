@@ -1,0 +1,12 @@
+{% if user %}
+<table>
+    <tr>
+        <td>User: </td>
+        <td>{{user.username}}</td>
+        <td>Email Address: </td>
+        <td>{{user.email}}</td>
+    </tr>
+</table>
+{% else %}
+<h1>User not found</h1>
+{% endif %}

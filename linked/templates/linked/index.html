@@ -1,0 +1,40 @@
+{% extends 'linked/base.html' %}
+
+{% block content %}
+{% if links %}
+{% for link in links %}
+<div style="border: 1px solid gray;">
+    <p>{{link.link.name}} <span style="color: gray; font-size:x-small">{{link.domain}}</span></p>
+    <p>{{link.link.url}}</p>
+    <p>{{link.link.description}}</p>
+    <p>Category: {{link.link.category}}</p>
+    <a href="/linked/{{link.link.pk}}/"><button>Details</button></a>
+    <a href="/linked/redirect/{{link.link.pk}}/"><button>Redirect</button></a>
+    <hr>
+    <div>
+        {% if auth %}
+        <form action="/linked/{{link.link.pk}}/" method="POST">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit">Submit</button>
+        </form>
+        {% else %}
+        <p><a href="/linked/login/" title="Log in">Log in</a> or <a href="/linked/signup/" title="Register">register</a> to do a review.</p>
+        {% endif %}
+    </div>
+    <div>
+        <ul>
+            {% for review in link.reviews %}
+
+            <li>{{ review.review }} (Rate {{ review.rate }}/5)</li>
+
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<p>No Links are available.</p>
+{% endif %}
+
+{% endblock %}
