@@ -79,6 +79,21 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'OPTIONS': {
+    #         'read_default_file': '/my.cnf',
+    #     },
+    # }
+    # 'default': {
+    #     'NAME': 'webindex',
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     # 'USER': 'superuser',
+    #     # 'PASSWORD': '4SQUGj6XRkshpbYa',
+    #     'OPTIONS': {
+    #       'autocommit': True,
+    #     },
+    # }
 }
 
 # DATABASES = {   'default': {      'ENGINE': 'djongo',      'NAME': 'WebIndex',   }}

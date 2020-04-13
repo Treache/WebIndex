@@ -1,0 +1,34 @@
+@import './bootstrap.css';
+@import '../fa/css/all.css';
+body {
+    background-color: #fff;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    min-width: 100%;
+}
+
+nav {
+    margin: 0 -15px;
+}
+
+.linkdomain {
+    color: gray;
+    font-size: small;
+}
+
+.linkurl {
+    color: gray;
+    margin-top: 0;
+}
+
+.fright {
+    float: right;
+}
+
+.fclear {
+    clear: both;
+}

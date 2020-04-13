@@ -4,7 +4,10 @@
     <h1>{{form_name}} Form</h1>
     <form action="" method="POST">
         {% csrf_token %}
-        {{form}}
+        {{form.as_p}}
+        {% if form_name == "Sign up" %}
+        {{profile.as_p}}
+        {% endif %}
         <button type="submit">{{form_name}}</button>
     </form>
     
