@@ -1,3 +1,65 @@
+{% extends 'linked/base.html' %}
+
+{% block content %}
+{% if link %}
+
+
+<div class="card">
+  <h5 class="card-header">{{link.name}}</h5>
+  <div class="card-body">
+    <h5>Domain</h5>
+    <p>{{link.domain}}</p>
+    <h5>URL</h5>
+    <p>{{link.url}}</p>
+      <h5>Category</h5>
+      <p><a href="/category/{{link.category.pk}}">{{link.category.name}}</a> </p>
+    <h5>Created on</h5>
+      <p>{{link.created_on}}</p>
+    <h5>Last update</h5>
+    <p>{{link.updated_on}}</p>
+    <h5 class="card-title">Description</h5>
+
+        <div class="card">
+            <div class="card-body">
+    <p class="card-text">{{link.description}}</p>
+            </div>
+        </div>
+    <hr>
+      <h5>Reviews:</h5>
+      <p><span class="fas fa-star"></span> {{avg}} | <span class="fas fa-users"></span> {{review_count}} </p>
+
+      {% for review in reviews %}
+      <div class="card">
+          <h5 class="card-header">{{review.by.user.username}}</h5>
+            <div class="card-body">
+                <p class="card-text">{{link.description}}</p>
+            </div>
+        </div>
+      <br>
+      {% endfor %}
+
+      <div class="card">
+          <h5 class="card-header">You</h5>
+          <div class="card-body">
+              <form action="" method="POST">
+                  {{form}}
+                  <button type="submit">Review</button>
+
+              </form>
+          </div>
+      </div>
+
+       </div>
+</div>
+
+
+
+
+{% else %}
+<h1>Link not found</h1>
+{% endif %}
+{% endblock %}
+
 <table>
     <tr>
         <th>Name:</th>

@@ -9,7 +9,7 @@ from django.db.models import Q
 
 from django.db.models import Avg
 from .link_tools import *
-from .linked_config import requirements as pointreq, points as rewards
+from .linked_config import requirements as pointreq, points as rewards, redirect as rd
 
 # Forms
 from .forms import LoginForm, SignUpForm, LinkForm, ReviewForm, UserProfileForm, CategoryForm
@@ -52,9 +52,17 @@ def detail(request, link_id):
     # Create context
     context = {
         'link': link,
-        'auth': request.user.is_authenticated
+        'auth': request.user.is_authenticated,
+        'form' : ReviewForm
 
     }
+
+    reviews = Review.objects.filter(link=link.pk)
+    avg = reviews.aggregate(Avg('rate'))
+
+    context['reviews'] = reviews
+    context['avg'] = avg['rate__avg']
+    context['review_count'] = reviews.count()
     # return HttpResponse("type: %s" % len(links))
     # Render the template
     return HttpResponse(template.render(context, request))
@@ -311,18 +319,18 @@ def profile(request, username=None):
     template = loader.get_template('linked/profile.html')
 
     # If username is not set but a session exists
-    if (username == None and request.user.is_authenticated):
+    if username == None and request.user.is_authenticated:
         # Set context user to logged in user
         userProfile = UserProfile.objects.get(user__pk=request.user.pk)
-        print(userProfile)
         context['user'] = userProfile
 
     # If username is set
     else:
         # Fetch user specified
-        user = User.objects.get(username=username)
+        user = UserProfile.objects.get(user__username=username)
         # userProfile = UserProfile.objects.get(user)
         # If user exists
+        print(user)
         if (user is not None):
             # Set context user to fetched user
             context['user'] = user
@@ -352,7 +360,8 @@ def redirect(request, link_id):
     # Create contect
     context = {
         'link': link,
-        'auth': request.user.is_authenticated
+        'auth': request.user.is_authenticated,
+        'delay': rd['delay']
     }
     # Render the template
     return HttpResponse(template.render(context, request))

@@ -11,3 +11,6 @@ requirements = {
     "review" : 0,
     "suggestion" : 0
 }
+redirect = {
+    "delay" : 5,
+}

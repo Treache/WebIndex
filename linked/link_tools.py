@@ -8,7 +8,7 @@ def view_final_link_dict(link: Link, reviews: [Review], average: float, total_re
 
 
 def final_link_review_calc_dict(link: Link, reviews: [Review], average, total_reviews: int) -> dict:
-    final_dict = {'link': link, 'reviews': reviews, 'average': average, 'total': total_reviews}
+    final_dict = {'link': link, 'reviews': reviews, 'average': average['rate__avg'], 'total': total_reviews}
     return final_dict
 
 

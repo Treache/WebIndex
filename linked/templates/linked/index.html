@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h3>{{link.link.name}} <span class="linkdomain">({{link.link.domain}})</span></h3>
+                        <h3><a href="/linked/{{link.link.pk}}/" >{{link.link.name}}</a> <span class="linkdomain">({{link.link.domain}})</span></h3>
                         <span class="linkurl"><i class="fas fa-link"></i> {{link.link.url}}</span>
                     </div>
                 </div>
@@ -48,7 +48,8 @@
                     </div>
                     <div class="col">
                         <div class="float-right">
-                            <a class="btn btn-primary" href="#"><i class="fas fa-paper-plane"></i> Redirect</a>
+                            <a class="btn btn-danger" href="#" title="Report Links"><i class="fas fa-exclamation"></i></a>
+                            <a class="btn btn-primary" target="_blank" href="/linked/redirect/{{link.link.pk}}"><i class="fas fa-paper-plane"></i> Redirect</a>
                             <a class="btn btn-primary" href="#" type="button" data-toggle="collapse"
                                data-target="#collapseComment{{link.link.pk}}" aria-expanded="false" aria-controls="collapseComment{{link.link.pk}}"><i class="fas fa-comments" ></i> Reviews
                                 <span>( <i class="fas fa-users" style="font-size: small;"></i> {{link.total}})</span></a>
@@ -66,7 +67,7 @@
                             {% else %}
                                 {% for review in link.reviews %}
                                     <div class="card card-body">
-                                        {{review.review}}
+                                        <p>'{{review.review}}' by <a href="/linked/profile/{{review.by.user.username}}">{{review.by.user.username}}</a></p>
                                     </div>
                                     <br>
                                 {% endfor %}
@@ -75,6 +76,7 @@
                             {% if auth %}
                                 <div class="card card-body">
                                     <h5>Your review:</h5>
+                                    
                                     <form action="{{link.link.pk}}/" method="POST">
                                         {% csrf_token %}
                                         {{form}}
@@ -83,7 +85,7 @@
                                 </div>
                             {%else%}
                                 <div class="card card-body">
-                                    Login or register to do a review.
+                                    <p><a href="/linked/login/" title="Login">Login</a> or <a href="/linked/signup/" title="Register">register</a> to do a review.</p>
                                 </div>
                             {%endif%}
                         </div>
@@ -96,41 +98,6 @@
         <br>
         <!-- LINK CARD END -->
 
-        <!-- A LINK CARD -->
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <h3>MegaMind.io <span class="linkdomain">(megamind.io)</span></h3>
-                        <span class="linkurl"><i class="fas fa-link"></i> https://www.megamind.io/</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p><b>Description: </b>MegaMind provides the best computer services such as web and software
-                            development, network design and implementation.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        4.8 <i class="fas fa-star"></i>
-                        (1,234 <li class="fas fa-users"></li>)
-
-                    </div>
-                    <div class="col">
-                        <li class="fas fa-user"></li> <a href="#">Erfan Khaksar</a>
-                        <li class="fas fa-layer-group"></li> <a href="#">Computer Services</a>
-                    </div>
-                    <div class="col">
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="#"><i class="fas fa-paper-plane"></i> Redirect</a>
-                            <a class="btn btn-primary" href="#"><i class="fas fa-comments"></i> Reviews
-                                <span>( <i class="fas fa-users" style="font-size: small;"></i> 1234)</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <br>
         <!-- LINK CARD END -->
 

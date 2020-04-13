@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 from django.db.models import F
+
 import datetime
 
 
@@ -47,6 +48,13 @@ class Link(models.Model):
     def __str__(self):
         return self.name
 
+    def user_already_has_review(self, user: User) -> bool:
+        print("hehehehe")
+        return Review.objects.filter(link=self, by=user.pk).count() > 0
+
+    def get_user_review(self, user: User):
+        return Review.objects.get(link=self, by=user.pk)
+
 
 class Review(models.Model):
     link = models.ForeignKey(Link, on_delete=models.CASCADE)
@@ -58,3 +66,4 @@ class Review(models.Model):
 
     def __str__(self):
         return self.review
+

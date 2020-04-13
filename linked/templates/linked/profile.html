@@ -1,12 +1,31 @@
+{% extends 'linked/base.html' %}
+
+{% block content %}
 {% if user %}
-<table>
-    <tr>
-        <td>User: </td>
-        <td>{{user.user.username}}</td>
-        <td>Email Address: </td>
-        <td>{{user.user.email}}</td>
-    </tr>
-</table>
+
+
+<div class="card">
+  <h5 class="card-header">{{user.user.username}}</h5>
+  <div class="card-body">
+    <h5>Email Address</h5>
+    <p>{{user.user.email}}</p>
+    <h5>Points</h5>
+    <p>{{user.points}}</p>
+    <h5>Jointed on</h5>
+    {{user.joined_on}}
+    <h5>Last Seen</h5>
+    <p>{{user.user.last_login}}</p>
+    <h5 class="card-title">Bio</h5>
+    <p class="card-text">{{user.bio}}</p>
+    <hr>
+    <a href="#" class="btn btn-primary">Edit</a>
+  </div>
+</div>
+
+
+
+
 {% else %}
 <h1>User not found</h1>
 {% endif %}
+{% endblock %}
